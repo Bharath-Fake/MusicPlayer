@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: 'https://music-player-two-plum.vercel.app',
+  origin: 'http://localhost:5173',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
@@ -83,9 +83,11 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // API routes
-app.use('/auth', authRoutes);
-app.use('/playlists', playlistRoutes);
-app.use('/songs', songRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/playlists', playlistRoutes);
+app.use('/api/songs', songRoutes);
+
+const API_URL = process.env.VITE_API_URL || 'http://localhost:5000/api';
 
 // Upload route for songs
 app.post('/api/upload', upload.single('song'), async (req, res) => {
@@ -94,12 +96,12 @@ app.post('/api/upload', upload.single('song'), async (req, res) => {
   }
 
   const songPath = path.join('songs', req.file.filename);
-  const API_URL = import.meta.env.VITE_API_URL;
   try {
-    const response = await axios.post(`${API_URL}/playlists`, { name: req.file.filename });
-    res.json({ message: 'Song uploaded successfully', file: songPath, playlistResponse: response.data });
+    //const response = await axios.post(`${API_URL}/playlists`, { name: req.file.filename });
+    // res.json({ message: 'Song uploaded successfully', file: songPath, playlistResponse: response.data });
+    res.json({ message: 'Song uploaded successfully', file: songPath });
   } catch (error) {
-    console.error('Error creating playlist:', error);
+    console.error('Error creating playlist:', error.stack || error);
     res.status(500).json({ error: 'Failed to create playlist' });
   }
 });

@@ -11,7 +11,7 @@ const Sidebar: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const API_URL = import.meta.env.VITE_API_URL; // Use environment variable for API URL
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'; // Use environment variable for API URL with fallback
 
   useEffect(() => {
     const checkMobile = () => {
@@ -134,7 +134,7 @@ const Sidebar: React.FC = () => {
             </NavLink>
           </div>
 
-          {playlists.length > 0 && (
+          {Array.isArray(playlists) && playlists.length > 0 && (
             <div className="p-4 border-t border-indigo-700">
               <h3 className="text-sm font-semibold uppercase text-indigo-300 mb-2">
                 Your Playlists

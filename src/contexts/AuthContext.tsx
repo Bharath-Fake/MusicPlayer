@@ -24,7 +24,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL = import.meta.env.VITE_API_URL;
+  const API_URL = "http://localhost:5000/api";
 
   // Configure axios defaults
   axios.defaults.withCredentials = true;
@@ -77,11 +77,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const checkAuth = async (): Promise<boolean> => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_URL}/auth/me`, { 
-        withCredentials: true,
-        validateStatus: (status) => status < 500 // Don't treat 401 as an error
+      const response = await axios.get(`${API_URL}/auth/me`, {
+        withCredentials: true, // Ensure cookies are sent
+        validateStatus: (status) => status < 500, // Don't treat 401 as an error
       });
-      
+
       if (response.status === 200) {
         setUser(response.data.user);
         return true;

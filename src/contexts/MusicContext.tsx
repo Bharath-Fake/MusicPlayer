@@ -46,7 +46,7 @@ export const MusicProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
 
-  const API_URL = '';
+  const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
   useEffect(() => {
     if (user) {
@@ -135,7 +135,7 @@ export const MusicProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         { withCredentials: true }
       );
       
-      console.log('Server response:', response.data);
+      console.log('song added to Playlist');
       
       // Update the playlist with the new song
       const updatedPlaylist = response.data;
