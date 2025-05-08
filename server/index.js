@@ -83,8 +83,8 @@ const upload = multer({ storage });
 
 // API routes
 app.use('/auth', authRoutes);
-app.use('/api/playlists', playlistRoutes);
-app.use('/api/songs', songRoutes);
+app.use('/playlists', playlistRoutes);
+app.use('/songs', songRoutes);
 
 // Upload route for songs
 app.post('/api/upload', upload.single('song'), (req, res) => {
