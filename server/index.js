@@ -7,6 +7,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import cookieParser from 'cookie-parser';
 import multer from 'multer';
+import axios from 'axios';
 import authRoutes from './routes/auth.js';
 import playlistRoutes from './routes/playlists.js';
 import songRoutes from './routes/songs.js';
@@ -19,7 +20,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // MongoDB connection string
-const mgdburl = process.env.MONGODB_URL;
+const mgdburl = "mongodb+srv://bharathk:Bharath+8510@cluster0.nw4rmjo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
 // Create Express app
 const app = express();
@@ -87,13 +88,20 @@ app.use('/playlists', playlistRoutes);
 app.use('/songs', songRoutes);
 
 // Upload route for songs
-app.post('/api/upload', upload.single('song'), (req, res) => {
+app.post('/api/upload', upload.single('song'), async (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
 
   const songPath = path.join('songs', req.file.filename);
-  res.json({ message: 'Song uploaded successfully', file: songPath });
+  const API_URL = import.meta.env.VITE_API_URL;
+  try {
+    const response = await axios.post(`${API_URL}/playlists`, { name: req.file.filename });
+    res.json({ message: 'Song uploaded successfully', file: songPath, playlistResponse: response.data });
+  } catch (error) {
+    console.error('Error creating playlist:', error);
+    res.status(500).json({ error: 'Failed to create playlist' });
+  }
 });
 
 // Error handling middleware
@@ -112,3 +120,4 @@ app.listen(PORT, () => {
 });
 
 export default app;
+
