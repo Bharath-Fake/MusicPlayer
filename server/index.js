@@ -82,7 +82,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // API routes
-app.use('/api/auth', authRoutes);
+app.use('/auth', authRoutes);
 app.use('/api/playlists', playlistRoutes);
 app.use('/api/songs', songRoutes);
 
