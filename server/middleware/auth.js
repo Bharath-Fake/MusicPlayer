@@ -10,7 +10,7 @@ const auth = (req, res, next) => {
     }
 
     // Verify token using the secret from environment variables
-    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'melodystream_secret_key');
+    const decoded = jwt.verify(token, process.env.JWT_SECRET || 'fakemusicplayer');
 
     // Attach user ID to request object
     req.userId = decoded.userId;

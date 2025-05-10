@@ -7,6 +7,7 @@ interface User {
   name: string;
 }
 
+
 interface AuthContextType {
   user: User | null;
   loading: boolean;

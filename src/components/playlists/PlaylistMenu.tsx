@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Trash2, Edit } from 'lucide-react';
+import { Trash2} from 'lucide-react';
 
 interface PlaylistMenuProps {
   playlistId: string;
@@ -7,7 +7,7 @@ interface PlaylistMenuProps {
   onClose: () => void;
 }
 
-const PlaylistMenu: React.FC<PlaylistMenuProps> = ({ playlistId, onDelete, onClose }) => {
+const PlaylistMenu: React.FC<PlaylistMenuProps> = ({ onDelete, onClose }) => {
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

@@ -20,7 +20,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // MongoDB connection string
-const mgdburl = "mongodb+srv://bharathk:Bharath+8510@cluster0.nw4rmjo.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+const mgdburl = process.env.MONGODB_URI;
 
 // Create Express app
 const app = express();
@@ -28,7 +28,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: process.env.FRONTEND_URL,
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
