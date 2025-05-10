@@ -25,7 +25,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const API_URL = "http://localhost:5000/api";
+  const API_URL = process.env.FRONTEND_URL;
 
   // Configure axios defaults
   axios.defaults.withCredentials = true;

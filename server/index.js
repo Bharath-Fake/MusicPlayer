@@ -87,7 +87,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/playlists', playlistRoutes);
 app.use('/api/songs', songRoutes);
 
-const API_URL = process.env.VITE_API_URL || 'http://localhost:5000/api';
+const API_URL = process.env.VITE_API_URL;
 
 // Upload route for songs
 app.post('/api/upload', upload.single('song'), async (req, res) => {
