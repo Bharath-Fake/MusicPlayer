@@ -11,7 +11,7 @@ const Sidebar: React.FC = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api'; // Use environment variable for API URL with fallback
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:/api'; // Use environment variable for API URL with fallback
 
   useEffect(() => {
     const checkMobile = () => {
