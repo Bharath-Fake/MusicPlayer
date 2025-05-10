@@ -23,7 +23,7 @@ router.post('/register', async (req, res, next) => {
     // Generate JWT token
     const token = jwt.sign(
       { userId: user._id },
-      process.env.JWT_SECRET || 'melodystream_secret_key',
+      process.env.JWT_SECRET || 'fakemusicplayer',
       { expiresIn: '7d' }
     );
     
@@ -60,7 +60,7 @@ router.post('/login', async (req, res, next) => {
     // Generate JWT token
     const token = jwt.sign(
       { userId: user._id },
-      process.env.JWT_SECRET || 'melodystream_secret_key',
+      process.env.JWT_SECRET || 'fakemusicplayer',
       { expiresIn: '7d' }
     );
     
